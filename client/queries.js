@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 export const getSongs = gql`
     {
         songs {
-            id,
+            id
             title
         }
     }
@@ -12,7 +12,7 @@ export const getSongs = gql`
 export const addSong = gql`
     mutation AddSong($title: String){
         addSong(title: $title) {
-        id,
+        id
         title
         }
     }
@@ -29,8 +29,35 @@ export const deleteSong = gql`
 export const getSong = gql`
     query SongQuery($id: ID!) {
         song(id: $id) {
-            id,
+            id
             title
+            lyrics {
+                id
+                content
+                likes
+            }
+        }
+    }
+`;
+
+export const addLyric = gql`
+    mutation AddLyricToSong($content: String, $songId: ID) {
+        addLyricToSong(content: $content, songId: $songId) {
+            id
+            lyrics {
+                id
+                content
+                likes
+            }
+        }
+    }
+`;
+
+export const upvoteLyric = gql`
+    mutation LikeLyric($id: ID) {
+        likeLyric(id: $id) {
+            id
+            likes
         }
     }
 `;

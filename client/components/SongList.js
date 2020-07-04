@@ -16,7 +16,7 @@ class SongList extends Component {
         return this.props.data.songs.map(({id, title}) => {
             return (
                 <li className="collection-item" key={id}>
-                    {title}
+                    <Link to={`/songs/${id}`}>{title}</Link>
                     <i className="material-icons" 
                         onClick={() => this.deleteSong(id)}>delete</i>
                 </li>
@@ -25,7 +25,6 @@ class SongList extends Component {
     }
 
     deleteSong(id) {
-        console.log('deleting', id);
         this.props.mutate({
             variables: {id}
         }).then(() => this.props.data.refetch());
